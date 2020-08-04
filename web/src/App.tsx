@@ -1,11 +1,9 @@
 import React from "react";
+import Landing from "./Pages/Landing";
+import "./assets/styles/global.css";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Salve quebrada</h1>
-    </div>
-  );
+  return <Landing />;
 }
 
 export default App;
