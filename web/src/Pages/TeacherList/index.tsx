@@ -3,26 +3,46 @@ import React from "react";
 import "./styles.css";
 import PageHeader from "../../components/PageHeader";
 import TeacherItem from "../../components/TeacherItem";
+import Input from "../../components/Input";
+import Select from "../../components/Select";
 
 function TeacherList() {
   return (
     <div id="page-teacher-list" className="container">
       <PageHeader title="Estes são os Proffys disponíveis.">
         <form id="search-teachers">
-          <div className="input-block">
-            <label htmlFor="subject">Matéria</label>
-            <input type="text" id="subject" />
-          </div>
+          <Select
+            name="subject"
+            label="Matéria"
+            options={[
+              { value: "Artes", label: "Artes" },
+              { value: "Matemática", label: "Matemática" },
+              { value: "Português", label: "Português" },
+              { value: "História", label: "História" },
+              { value: "Geografia", label: "Geografia" },
+              { value: "Ciências", label: "Ciências" },
+              { value: "Química", label: "Química" },
+              { value: "Educação física", label: "Educação física" },
+              { value: "Educação artística", label: "Educação artística" },
+              { value: "Filosofia", label: "Filosofia" },
+            ]}
+          />
 
-          <div className="input-block">
-            <label htmlFor="week_day">Dia da semana</label>
-            <input type="text" id="week_day" />
-          </div>
+          <Select
+            name="week_day"
+            label="Dia da semana"
+            options={[
+              { label: "0", value: "Domingo" },
+              { label: "1", value: "Segunda-feira" },
+              { label: "2", value: "Terça-feira" },
+              { label: "3", value: "Quarta-feira" },
+              { label: "4", value: "Quinta-feira" },
+              { label: "5", value: "Sexta-feira" },
+              { label: "6", value: "Sábado" },
+            ]}
+          />
 
-          <div className="input-block">
-            <label htmlFor="time">Hora</label>
-            <input type="text" id="time" />
-          </div>
+          <Input type="time" name="time" label="Hora" />
         </form>
       </PageHeader>
 
