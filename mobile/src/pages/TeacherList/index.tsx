@@ -4,13 +4,13 @@ import { View, ScrollView, Text, TextInput } from "react-native";
 
 import styles from "./styles";
 import PageHeader from "../../components/PageHeader";
-import TeacherItem from "../../components/TeacherItem";
+import TeacherItem, { Teacher } from "../../components/TeacherItem";
 import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import api from "../../services/api";
 
 function TeacherList() {
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
-  const [teachers, setTeachers] = useState("");
+  const [teachers, setTeachers] = useState([]);
   const [subject, setSubject] = useState("");
   const [week_day, setWeekDay] = useState("");
   const [time, setTime] = useState("");
@@ -27,7 +27,8 @@ function TeacherList() {
         time,
       },
     });
-
+    //57"
+    setIsFiltersVisible(false);
     setTeachers(response.data);
   }
 
@@ -93,11 +94,9 @@ function TeacherList() {
           paddingBottom: 16,
         }}
       >
-        <TeacherItem />
-        <TeacherItem />
-        <TeacherItem />
-        <TeacherItem />
-        <TeacherItem />
+        {teachers.map((teacher: Teacher) => (
+          <TeacherItem key={teacher.id} teacher={teacher} />
+        ))}
       </ScrollView>
     </View>
   );
