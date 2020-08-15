@@ -9,9 +9,9 @@ import giveClassesIcon from "../../assets/images/icons/give-classes.png";
 import heartIcon from "../../assets/images/icons/heart.png";
 import api from "../../services/api";
 
-function Landing() {
+const Landing: React.FC = () => {
   const { navigate } = useNavigation();
-  const [totalConnections, setTotalConnections] = useState();
+  const [totalConnections, setTotalConnections] = useState(0);
 
   useEffect(() => {
     api.get("/connections").then((response) => {
@@ -61,6 +61,6 @@ function Landing() {
       </Text>
     </View>
   );
-}
+};
 
 export default Landing;

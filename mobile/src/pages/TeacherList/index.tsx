@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Feather } from "@expo/vector-icons";
 import { View, ScrollView, Text, TextInput } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
-
+import { useFocusEffect } from "@react-navigation/native";
 import styles from "./styles";
 import PageHeader from "../../components/PageHeader";
 import TeacherItem, { Teacher } from "../../components/TeacherItem";
 import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import api from "../../services/api";
 
-function TeacherList() {
+const TeacherList: React.FC = () => {
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
   const [teachers, setTeachers] = useState([]);
   const [favorites, setFavorites] = useState<number[]>([]);
@@ -17,10 +17,25 @@ function TeacherList() {
   const [week_day, setWeekDay] = useState("");
   const [time, setTime] = useState("");
 
-  useEffect(() => {
-    AsyncStorage.getItem("favorites").then((response) => {
-      if (response) {
-        const favoritedTeachers = JSON.parse(response);
+  // useEffect(() => {
+  //   AsyncStorage.getItem("favorites").then((response) => {
+  //     if (response) {
+  //       const favoritedTeachers = JSON.parse(response);
+  //       const favoritedTeachersIds = favoritedTeachers.map(
+  //         (teacher: Teacher) => {
+  //           return teacher.id;
+  //         }
+  //       );
+
+  //       setFavorites(favoritedTeachersIds);
+  //     }
+  //   });
+  // }, []);
+
+  function loadFavorites() {
+    AsyncStorage.getItem("favorites").then((res) => {
+      if (res) {
+        const favoritedTeachers = JSON.parse(res);
         const favoritedTeachersIds = favoritedTeachers.map(
           (teacher: Teacher) => {
             return teacher.id;
@@ -30,13 +45,19 @@ function TeacherList() {
         setFavorites(favoritedTeachersIds);
       }
     });
-  }, []);
+  }
+
+  useFocusEffect(() => {
+    loadFavorites();
+  });
 
   function handleToggleFiltersVisible() {
     setIsFiltersVisible(!isFiltersVisible);
   }
 
   async function handleFiltersSubmit() {
+    loadFavorites();
+
     const response = await api.get("classes", {
       params: {
         subject,
@@ -123,6 +144,6 @@ function TeacherList() {
       </ScrollView>
     </View>
   );
-}
+};
 
 export default TeacherList;
