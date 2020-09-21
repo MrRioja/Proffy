@@ -1,10 +1,14 @@
 import express from "express";
 import ClassesController from "./controllers/ClassesController";
 import ConnectionsController from "./controllers/ConnectionsController";
+import RegistrationsController from "./controllers/RegistrationsController";
 
 const routes = express.Router();
 const classesControllers = new ClassesController();
 const connectionsController = new ConnectionsController();
+const registrationsController = new RegistrationsController();
+
+routes.post("/register", registrationsController.create);
 
 routes.get("/classes", classesControllers.index);
 routes.post("/classes", classesControllers.create);
