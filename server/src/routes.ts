@@ -9,6 +9,7 @@ const connectionsController = new ConnectionsController();
 const registrationsController = new RegistrationsController();
 
 routes.post("/register", registrationsController.create);
+routes.post("/login", registrationsController.index);
 
 routes.get("/classes", classesControllers.index);
 routes.post("/classes", classesControllers.create);

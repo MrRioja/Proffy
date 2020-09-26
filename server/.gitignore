@@ -1,2 +1,4 @@
 node_modules/
 *.txt
+jwt.js
+bcrypt.ts
