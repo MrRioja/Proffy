@@ -24,7 +24,7 @@ function Login() {
         <div className="form">
           <h1>Fazer login</h1>
           <Input label="E-mail" name="E-mail" />
-          <Input label="Senha" name="Senha" />
+          <Input label="Senha" name="Senha" type="password" />
         </div>
       </div>
     </div>
