@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent, useState } from "react";
 
 import Input from "../../components/InputLogin";
 
@@ -10,6 +10,16 @@ import Checkbox from "../../components/Checkbox";
 import { Link } from "react-router-dom";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
+
+  function handleLogin(e: FormEvent) {
+    e.preventDefault();
+
+    console.log({ email, password, remember });
+  }
+
   return (
     <div className="page">
       <div className="left-side">
@@ -26,13 +36,33 @@ function Login() {
       <div className="right-side">
         <div className="form">
           <h1>Fazer login</h1>
-          <Input label="E-mail" name="E-mail" type="text" />
-          <Input label="Senha" name="Senha" type="password" />
+          <Input
+            label="E-mail"
+            name="E-mail"
+            type="text"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <Input
+            label="Senha"
+            name="Senha"
+            type="password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
           <div className="password">
-            <Checkbox label="Lembrar-me" name="remember" />
+            <Checkbox
+              label="Lembrar-me"
+              name="remember"
+              defaultChecked={remember}
+            />
             <a href="">Esqueci minha senha</a>
           </div>
-          <Link to="/" className="entrar">
+          <Link to="/" onClick={handleLogin} className="entrar">
             Entrar
           </Link>
         </div>
