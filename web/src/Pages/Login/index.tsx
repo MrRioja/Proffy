@@ -1,23 +1,44 @@
 import React, { FormEvent, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import api from "../../services/api";
 
 import Input from "../../components/InputLogin";
+import Checkbox from "../../components/Checkbox";
 
 import "./styles.css";
-import background from "../../assets/images/success-background.svg";
-import heart from "../../assets/images/icons/purple-heart.svg";
 import logo from "../../assets/images/logo.svg";
-import Checkbox from "../../components/Checkbox";
-import { Link } from "react-router-dom";
+import heart from "../../assets/images/icons/purple-heart.svg";
+import background from "../../assets/images/success-background.svg";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
 
-  function handleLogin(e: FormEvent) {
+  const history = useHistory();
+
+  async function handleLogin(e: FormEvent) {
     e.preventDefault();
 
-    console.log({ email, password, remember });
+    api
+      .post("/login", {
+        email,
+        password,
+      })
+      .then((response) => {
+        const { id, name, lastname, email } = response.data.user;
+        const token = response.data.token;
+        console.log({ id, name, lastname, email, token });
+
+        history.push("/landing");
+      })
+      .catch(() => {
+        alert("Erro ao realizar login");
+      });
+  }
+
+  function handleRemember() {
+    setRemember(!remember);
   }
 
   return (
@@ -34,7 +55,7 @@ function Login() {
       </div>
 
       <div className="right-side">
-        <div className="form">
+        <form onSubmit={handleLogin} className="form">
           <h1>Fazer login</h1>
           <Input
             label="E-mail"
@@ -58,14 +79,15 @@ function Login() {
             <Checkbox
               label="Lembrar-me"
               name="remember"
-              defaultChecked={remember}
+              checked={remember}
+              onChange={handleRemember}
             />
-            <a href="">Esqueci minha senha</a>
+            <a href="/reset-pass">Esqueci minha senha</a>
           </div>
-          <Link to="/" onClick={handleLogin} className="entrar">
+          <button className="entrar" type="submit">
             Entrar
-          </Link>
-        </div>
+          </button>
+        </form>
 
         <div className="footer">
           <div className="register">

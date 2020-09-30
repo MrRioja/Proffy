@@ -9,8 +9,8 @@ import Login from "./Pages/Login";
 function Routes() {
   return (
     <BrowserRouter>
-      <Route exact path="/" component={Landing} />
-      <Route path="/login" component={Login} />
+      <Route exact path="/" component={Login} />
+      <Route path="/landing" component={Landing} />
       <Route path="/study" component={TeacherList} />
       <Route path="/give-classes" component={TeacherForm} />
     </BrowserRouter>
