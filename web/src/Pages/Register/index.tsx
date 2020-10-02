@@ -2,7 +2,7 @@ import React from "react";
 
 import "./styles.css";
 
-import Input from "../../components/Input";
+import InputLogin from "../../components/InputLogin";
 
 import logo from "../../assets/images/logo.svg";
 import background from "../../assets/images/success-background.svg";
@@ -13,24 +13,28 @@ function Register() {
   return (
     <>
       <div className="leftside">
-        <Link to="/" className="back">
-          <img src={back} alt="Voltar" />
-        </Link>
+        <div className="previous-page">
+          <Link to="/">
+            <img src={back} alt="Voltar" />
+          </Link>
+        </div>
 
-        <h1>Cadastro</h1>
-        <p>Prencha os dados abaixo para começar.</p>
+        <div className="title-group">
+          <h1 className="title">Cadastro</h1>
+          <p>Prencha os dados abaixo para começar.</p>
+        </div>
 
         <form action="">
-          <Input label="Nome" name="nome"></Input>
-          <Input label="Sobrenome" name="sobrenome"></Input>
-          <Input label="E-mail" name="email"></Input>
-          <Input label="Senha" name="senha"></Input>
+          <InputLogin label="Nome" name="nome"></InputLogin>
+          <InputLogin label="Sobrenome" name="sobrenome"></InputLogin>
+          <InputLogin label="E-mail" name="email"></InputLogin>
+          <InputLogin label="Senha" name="senha"></InputLogin>
           <button type="submit">Concluir cadastro</button>
         </form>
       </div>
 
       <div className="rightside">
-        <div className="background-container">
+        <div className="container-background">
           <img src={background} alt="Background" />
         </div>
 
