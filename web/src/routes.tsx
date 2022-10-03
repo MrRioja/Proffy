@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
-import Landing from "./Pages/Landing";
-import TeacherList from "./Pages/TeacherList";
-import TeacherForm from "./Pages/TeacherForm";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
-import Registered from "./Pages/Register/Registered";
+import Landing from "./pages/Landing";
+import TeacherList from "./pages/TeacherList";
+import TeacherForm from "./pages/TeacherForm";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Registered from "./pages/Register/Registered";
 
 function Routes() {
   return (
