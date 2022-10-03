@@ -21,7 +21,7 @@ function Register() {
 
         <div className="title-group">
           <h1 className="title">Cadastro</h1>
-          <p>Prencha os dados abaixo para começar.</p>
+          <p>Preencha os dados abaixo para começar.</p>
         </div>
 
         <form action="">
