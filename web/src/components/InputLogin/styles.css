@@ -38,6 +38,10 @@
   border-left: 3px solid var(--color-primary);
 }
 
-.input-group input:focus+label {
+.input-group input:valid + label {
+  transform: scale(0.8) translateY(-16px);
+}
+
+.input-group input:focus + label {
   transform: scale(0.8) translateY(-16px);
 }

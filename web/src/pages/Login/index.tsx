@@ -58,6 +58,7 @@ function Login() {
         <form onSubmit={handleLogin} className="form">
           <h1>Fazer login</h1>
           <Input
+            required
             label="E-mail"
             name="E-mail"
             type="text"
@@ -67,6 +68,7 @@ function Login() {
             }}
           />
           <Input
+            required
             label="Senha"
             name="Senha"
             type="password"
