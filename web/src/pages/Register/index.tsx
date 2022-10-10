@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent, useState } from "react";
 
 import "./styles.css";
 
@@ -7,9 +7,36 @@ import InputLogin from "../../components/InputLogin";
 import logo from "../../assets/images/logo.svg";
 import background from "../../assets/images/success-background.svg";
 import back from "../../assets/images/icons/back.svg";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import api from "../../services/api";
 
 function Register() {
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+
+  const history = useHistory();
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+
+    try {
+      const token = await api.post("/register", {
+        name,
+        lastName,
+        email,
+        pass,
+      });
+
+      if (token) {
+        history.push("/registered");
+      }
+    } catch (error) {
+      alert(error);
+    }
+  }
+
   return (
     <>
       <div className="leftside">
@@ -24,11 +51,32 @@ function Register() {
           <p>Preencha os dados abaixo para começar.</p>
         </div>
 
-        <form action="">
-          <InputLogin label="Nome" name="nome"></InputLogin>
-          <InputLogin label="Sobrenome" name="sobrenome"></InputLogin>
-          <InputLogin label="E-mail" name="email"></InputLogin>
-          <InputLogin label="Senha" name="senha"></InputLogin>
+        <form onSubmit={handleSubmit}>
+          <InputLogin
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            label="Nome"
+            name="nome"
+          />
+          <InputLogin
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            label="Sobrenome"
+            name="sobrenome"
+          />
+          <InputLogin
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            label="E-mail"
+            name="email"
+          />
+          <InputLogin
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
+            type="password"
+            label="Senha"
+            name="senha"
+          />
           <button type="submit">Concluir cadastro</button>
         </form>
       </div>

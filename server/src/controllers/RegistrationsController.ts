@@ -7,7 +7,7 @@ export default class RegistrationsController {
   async create(request: Request, response: Response) {
     const salt = "$2b$16$U/SMclK9FvsEIDIVskmFke";
 
-    const { name, lastname, email, pass } = request.body;
+    const { name, lastName, email, pass } = request.body;
     const password = bcrypt.hashSync(pass, salt);
 
     const checkEmail = await db("clients")
@@ -26,7 +26,7 @@ export default class RegistrationsController {
     try {
       const insertedUsersIds = await tsx("clients").insert({
         name,
-        lastname,
+        lastName,
         email,
         password,
       });
