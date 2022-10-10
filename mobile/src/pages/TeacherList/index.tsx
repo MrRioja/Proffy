@@ -17,32 +17,28 @@ const TeacherList: React.FC = () => {
   const [week_day, setWeekDay] = useState("");
   const [time, setTime] = useState("");
 
-  // useEffect(() => {
-  //   AsyncStorage.getItem("favorites").then((response) => {
-  //     if (response) {
-  //       const favoritedTeachers = JSON.parse(response);
-  //       const favoritedTeachersIds = favoritedTeachers.map(
-  //         (teacher: Teacher) => {
-  //           return teacher.id;
-  //         }
-  //       );
+  useEffect(() => {
+    AsyncStorage.getItem("favorites").then((response) => {
+      if (response) {
+        const favoriteTeachers = JSON.parse(response);
+        const favoriteTeachersIds = favoriteTeachers.map((teacher: Teacher) => {
+          return teacher.id;
+        });
 
-  //       setFavorites(favoritedTeachersIds);
-  //     }
-  //   });
-  // }, []);
+        setFavorites(favoriteTeachersIds);
+      }
+    });
+  }, []);
 
   function loadFavorites() {
     AsyncStorage.getItem("favorites").then((res) => {
       if (res) {
-        const favoritedTeachers = JSON.parse(res);
-        const favoritedTeachersIds = favoritedTeachers.map(
-          (teacher: Teacher) => {
-            return teacher.id;
-          }
-        );
+        const favoriteTeachers = JSON.parse(res);
+        const favoriteTeachersIds = favoriteTeachers.map((teacher: Teacher) => {
+          return teacher.id;
+        });
 
-        setFavorites(favoritedTeachersIds);
+        setFavorites(favoriteTeachersIds);
       }
     });
   }
@@ -58,7 +54,7 @@ const TeacherList: React.FC = () => {
   async function handleFiltersSubmit() {
     loadFavorites();
 
-    const response = await api.get("classes", {
+    const response = await api.get("/classes", {
       params: {
         subject,
         week_day,
