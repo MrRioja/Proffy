@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./web/src/assets/images/logo.svg" alt="Logo Proffy" />
+  <img src="./readme/logo.png" alt="Logo Proffy" />
 </p>
 
 <p align="center" >
